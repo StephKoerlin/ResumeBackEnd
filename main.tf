@@ -1,7 +1,21 @@
+#The configuration for the `remote` backend.
+   terraform {
+     backend "remote" {
+       # The name of your Terraform Cloud organization.
+       organization = "StephKoerlin"
+
+       # The name of the Terraform Cloud workspace to store Terraform state files in.
+       workspaces {
+         name = "ResumeProd"
+       }
+     }
+   }
+
 provider "aws" {
   region  = var.aws_region
   profile = var.aws_profile
 }
+
 
 #-----S3-----
 

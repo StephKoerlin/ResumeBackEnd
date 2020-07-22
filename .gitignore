@@ -2,3 +2,4 @@
 .idea
 terraform.*
 __pycache__
+.terraform
