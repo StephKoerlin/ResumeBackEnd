@@ -1,3 +1,8 @@
+provider "aws" {
+  region  = var.aws_region
+  profile = var.aws_profile
+}
+
 #The configuration for the `remote` backend.
    terraform {
      backend "remote" {
@@ -10,11 +15,6 @@
        }
      }
    }
-
-provider "aws" {
-  region  = var.aws_region
-  profile = var.aws_profile
-}
 
 
 #-----S3-----
