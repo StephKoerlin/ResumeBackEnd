@@ -28,7 +28,7 @@ def increase_count():
 
     :return: updated count
     """
-    botoR = boto3.resource('dynamodb')
+    botoR = boto3.resource('dynamodb', region_name='us-east-1')
     table = botoR.Table('VisitorTable')
 
     new_count = lf.update_visitors(table)
@@ -65,7 +65,7 @@ def test_validate_response():
     mynewcount = new_count()
 
     botoC = boto3.client('dynamodb')
-    botoR = boto3.resource('dynamodb')
+    botoR = boto3.resource('dynamodb', region_name='us-east-1')
     table = botoR.Table('VisitorTable')
     lf.decrement_visitors(table)
 
