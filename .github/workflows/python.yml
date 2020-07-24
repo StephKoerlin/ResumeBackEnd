@@ -12,10 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
       - name: Set up Python 3.8
+        uses: actions/checkout@v2
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
@@ -35,17 +34,13 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Test with pytest
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          pytest
-        needs: build
+        run: pytest
+    needs: build
 
 
   deploy:
@@ -53,12 +48,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Merge working code to master
-      - uses: actions/checkout@master
-
+        uses: actions/checkout@master
       - name: Merge staging -> master
         uses: devmasx/merge-branch@v1.3.0
         with:
           type: now
           target_branch: master
           github_token: ${{ secrets.TOKEN }}
-        needs: test
+    needs: test
