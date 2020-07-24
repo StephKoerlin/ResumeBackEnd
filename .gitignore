@@ -3,3 +3,6 @@
 terraform.*
 __pycache__
 .terraform
+myZipFile.zip
+output.zip.b64
+testzip.py

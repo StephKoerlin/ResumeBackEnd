@@ -1,19 +1,19 @@
 provider "aws" {
-  region  = var.aws_region
+  region = var.aws_region
 }
 
-#The configuration for the `remote` backend.
-   terraform {
-     backend "remote" {
-       # The name of your Terraform Cloud organization.
-       organization = "StephKoerlin"
+#The configuration for the `remote` backend
+terraform {
+  backend "remote" {
+    # The name of your Terraform Cloud organization
+    organization = "StephKoerlin"
 
-       # The name of the Terraform Cloud workspace to store Terraform state files in.
-       workspaces {
-         name = "ResumeProd"
-       }
-     }
-   }
+    # The name of the Terraform Cloud workspace to store Terraform state files in
+    workspaces {
+      name = "ResumeProd"
+    }
+  }
+}
 
 
 #-----S3-----
@@ -22,7 +22,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "resume_code" {
   bucket = var.domain_name
-  acl = "private"
+  acl    = "private"
 
   website {
     index_document = "index.html"
@@ -57,7 +57,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   default_root_object = "index.html"
   aliases = [
     var.domain_name,
-    "www.${var.domain_name}"]
+  "www.${var.domain_name}"]
 
   default_cache_behavior {
     allowed_methods = [
@@ -67,10 +67,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       "OPTIONS",
       "PATCH",
       "POST",
-      "PUT"]
+    "PUT"]
     cached_methods = [
       "GET",
-      "HEAD"]
+    "HEAD"]
     target_origin_id = aws_cloudfront_origin_access_identity.resumeOA.id
 
     forwarded_values {
@@ -94,7 +94,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
         "US",
         "CA",
         "GB",
-        "DE"]
+      "DE"]
     }
   }
 
@@ -378,7 +378,6 @@ resource "aws_api_gateway_integration_response" "get_integration_response" {
   }
   depends_on = [aws_api_gateway_method_response.get_response_200]
 }
-
 
 #deploy api to Prod stage
 
