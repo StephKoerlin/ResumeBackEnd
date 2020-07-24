@@ -34,5 +34,4 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with pytest
         run: |
-          boto3.setup_default_session(region_name='us-east-1')
           pytest
