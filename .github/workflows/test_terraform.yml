@@ -3,7 +3,7 @@ name: 'Test & Terraform'
 on:
   push:
     branches:
-
+      - master
 
 jobs:
   test_python:
@@ -71,4 +71,4 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: terraform apply -auto-approve
-  needs: test_python
+    needs: test_python
