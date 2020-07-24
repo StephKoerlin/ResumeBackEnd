@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-  build_test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,17 +31,34 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Test with pytest
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           pytest
+        needs: build
+
+
+  deploy:
+
+    runs-on: ubuntu-latest
+    steps:
       - name: Merge working code to master
       - uses: actions/checkout@master
+
       - name: Merge staging -> master
         uses: devmasx/merge-branch@v1.3.0
         with:
           type: now
           target_branch: master
           github_token: ${{ secrets.TOKEN }}
+        needs: test
