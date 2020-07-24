@@ -40,12 +40,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Merge staging -> master
-        uses: devmasx/merge-branch@v1.3.0
+      - uses: actions/checkout@v2
+      - uses: everlytic/branch-merge
         with:
-          type: now
-          from_branch: staging
-          target_branch: master
           github_token: ${{ secrets.TOKEN }}
+          source_ref: 'staging'
+          target_branch: 'master'
     needs: build_test
