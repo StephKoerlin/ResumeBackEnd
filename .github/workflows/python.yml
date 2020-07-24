@@ -40,12 +40,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Merge working code to master
-        uses: actions/checkout@master
+      - uses: actions/checkout@master
       - name: Merge staging -> master
         uses: devmasx/merge-branch@v1.3.0
         with:
           type: now
+          from_branch: staging
           target_branch: master
           github_token: ${{ secrets.TOKEN }}
     needs: build_test
