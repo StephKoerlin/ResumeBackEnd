@@ -6,7 +6,7 @@ name: 'Python Testing'
 on:
   push:
     branches:
-    - "!master"
+    - "staging"
 
 
 jobs:
