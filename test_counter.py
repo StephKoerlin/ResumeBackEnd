@@ -11,7 +11,7 @@ def current_count():
 
     :return: dict for Visitors
     """
-    botoC = boto3.client('dynamodb')
+    botoC = boto3.client('dynamodb', region_name='us-east-1')
     real_count = botoC.get_item(
         TableName='VisitorTable',
         Key= {
@@ -42,7 +42,7 @@ def new_count():
 
     :return: dict for Visitors
     """
-    botoC = boto3.client('dynamodb')
+    botoC = boto3.client('dynamodb', region_name='us-east-1')
     updated_count = botoC.get_item(
         TableName='VisitorTable',
         Key= {
@@ -64,7 +64,7 @@ def test_validate_response():
     increase_count()
     mynewcount = new_count()
 
-    botoC = boto3.client('dynamodb')
+    botoC = boto3.client('dynamodb', region_name='us-east-1')
     botoR = boto3.resource('dynamodb', region_name='us-east-1')
     table = botoR.Table('VisitorTable')
     lf.decrement_visitors(table)
