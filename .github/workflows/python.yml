@@ -35,7 +35,7 @@ jobs:
 
   test:
 
-    uses: build
+    runs-on: ubuntu-latest
     steps:
       - name: Test with pytest
         env:
@@ -43,6 +43,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           pytest
+        needs: build
 
 
   deploy:
