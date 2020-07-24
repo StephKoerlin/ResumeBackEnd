@@ -1,6 +1,7 @@
 import boto3
 from moto import mock_dynamodb2
-from counterfunction import counter_function as cf
+import lambda_function as lf
+
 
 
 #-----testing in AWS environment-----
@@ -31,7 +32,7 @@ def increase_count():
     botoR = boto3.resource('dynamodb')
     table = botoR.Table('VisitorTable')
 
-    new_count = cf.update_visitors(table)
+    new_count = lf.update_visitors(table)
     print('Running increase function')
     return new_count
 
@@ -67,7 +68,7 @@ def test_validate_response():
     botoC = boto3.client('dynamodb')
     botoR = boto3.resource('dynamodb')
     table = botoR.Table('VisitorTable')
-    cf.decrement_visitors(table)
+    lf.decrement_visitors(table)
 
     reverseMockItem = botoC.get_item(
         TableName='VisitorTable',
@@ -130,7 +131,7 @@ def trim_dict(mydict: dict) -> int:
 #     botoR = boto3.resource('dynamodb')
 #     table = botoR.Table('MockTable')
 #     print('Running increase function')
-#     cf.update_visitors(table)
+#     lf.update_visitors(table)
 #
 #     newMockItem = botoC.get_item(
 #         TableName='MockTable',
