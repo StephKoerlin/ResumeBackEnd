@@ -1,5 +1,4 @@
 import boto3
-from moto import mock_dynamodb2
 import lambda_function as lf
 
 
@@ -86,64 +85,6 @@ def trim_dict(mydict: dict) -> int:
     for key, value in mydict.items():
         return int(value)
 
-
-#-----testing in mock environment-----
-
-# testing against mock environment with local script
-# def mock_environment():
-#     mock = mock_dynamodb2()
-#     mock.start()
-#
-#     #create mock table and add in first item
-#     botoC = boto3.client('dynamodb', region_name='us-east-1')
-#     botoC.create_table(
-#         TableName='MockTable',
-#         KeySchema=[
-#             {
-#             'AttributeName': 'Site',
-#             'KeyType': 'HASH'
-#             }
-#         ],
-#         AttributeDefinitions=[
-#             {
-#             'AttributeName': 'Site',
-#             'AttributeType': 'S'
-#             }
-#         ],
-#         BillingMode='PAY_PER_REQUEST'
-#     )
-#     botoC.put_item(
-#         TableName='MockTable',
-#         Item={
-#             "Site": {"S": "Resume"},
-#             "Visitors": {"N": "0"}
-#         }
-#     )
-#
-#     mock_count = botoC.get_item(
-#         TableName='MockTable',
-#         Key= {
-#             "Site": {"S": "Resume"}
-#         }
-#     )
-#     print(mock_count['Item']['Visitors'])
-#
-#     botoR = boto3.resource('dynamodb')
-#     table = botoR.Table('MockTable')
-#     print('Running increase function')
-#     lf.update_visitors(table)
-#
-#     newMockItem = botoC.get_item(
-#         TableName='MockTable',
-#         Key= {
-#             "Site": {"S": "Resume"}
-#         }
-#     )
-#     print(newMockItem['Item']['Visitors'])
-#
-#     mock.stop()
-#
-# mock_environment()
 
 if __name__ == "__main__":
     print('this is only a test, please execute with pytest')
