@@ -54,6 +54,5 @@ jobs:
         with:
           type: now
           target_branch: master
-          github_token: ${{ secrets.TOKEN }}
       needs: test
 
