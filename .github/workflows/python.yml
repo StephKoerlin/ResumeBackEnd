@@ -37,12 +37,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           pytest
-
-
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Merge working code to master
       - uses: actions/checkout@master
       - name: Merge staging -> master
