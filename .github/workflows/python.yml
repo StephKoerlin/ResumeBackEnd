@@ -45,11 +45,9 @@ jobs:
     steps:
       - name: Merge working code to master
       - uses: actions/checkout@master
-
       - name: Merge staging -> master
         uses: devmasx/merge-branch@v1.3.0
         with:
           type: now
           target_branch: master
           github_token: ${{ secrets.TOKEN }}
-        needs: build_test
