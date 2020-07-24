@@ -35,3 +35,5 @@ def decrement_visitors(table):
         ReturnValues='UPDATED_NEW'
     )
     return updatedresponse
+
+print('testing python workflow')
